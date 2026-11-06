@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="web_dashboard" name="shell-type"/>
+<title>TeamNest • #design with Nesty AI</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "canvas-dark": "#1A1418",
+            "sidebar-bg": "#0F0B0E",
+            "sidebar-text": "#F2E4DE",
+            "muted-plum": "#9C8A90",
+            "rosegold-active": "#E8B4A0",
+            "chat-bg": "#221A20",
+            "panel-drawer": "#1B1319",
+            "border-plum": "#2E222B",
+            "border-plum-light": "#3A2D36",
+            "card-dark": "#2A1F26",
+            "action-card": "#261B23",
+            "bubble-plum-1": "#33242E",
+            "bubble-plum-2": "#3B2A2A",
+            "rosegold-primary": "#B76E79",
+            "plum-deep": "#3D1E3A",
+          },
+          fontFamily: {
+            sans: ["'Plus Jakarta Sans'", "sans-serif"],
+            mono: ["'JetBrains Mono'", "monospace"],
+          },
+          borderRadius: {
+            '24': '24px',
+            '20': '20px',
+            '18': '18px',
+          },
+          boxShadow: {
+            'app-frame': '0 20px 50px rgba(0, 0, 0, 0.5)',
+            'bubble': '0 2px 8px rgba(0, 0, 0, 0.25)',
+            'card-warm': '0 4px 16px rgba(0, 0, 0, 0.3)',
+            'nesty-panel': '-8px 0 32px rgba(0, 0, 0, 0.35)',
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #F5EAE6;
+    }
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(183, 110, 121, 0.25);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  </style>
+</head>
+<body class="bg-canvas-dark min-h-screen p-4 xl:p-6 flex items-center justify-center antialiased select-none overflow-x-hidden">
+<!-- Floating 24px Rounded App Window Frame -->
+<div class="w-full max-w-[1440px] h-[92vh] min-h-[760px] max-h-[920px] bg-chat-bg rounded-24 shadow-app-frame border border-border-plum overflow-hidden flex flex-row relative">
+<!-- 1. LEFT SIDEBAR: Deepest Plum #0F0B0E -->
+<aside class="w-64 bg-sidebar-bg text-sidebar-text flex flex-col flex-shrink-0 border-r border-border-plum z-20">
+<!-- Workspace Brand Header -->
+<div class="p-5 pb-4 flex items-center justify-between border-b border-border-plum">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-plum-deep to-rosegold-primary flex items-center justify-center text-white shadow-sm border border-rosegold-primary/20">
+<span class="material-symbols-outlined text-[20px] font-bold">nest_eco_leaf</span>
+</div>
+<div>
+<div class="font-bold text-[17px] leading-tight text-[#F5EAE6] flex items-center gap-1.5">
+              TeamNest
+              <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-rosegold-active/20 text-rosegold-active font-medium tracking-wide">PRO</span>
+</div>
+<p class="text-[12px] text-muted-plum">Cozy Workspace</p>
+</div>
+</div>
+<button class="w-7 h-7 rounded-xl hover:bg-white/10 flex items-center justify-center text-muted-plum hover:text-[#F5EAE6] transition-colors">
+<span class="material-symbols-outlined text-[18px]">unfold_more</span>
+</button>
+</div>
+<!-- Scrollable Channel & DM List -->
+<div class="flex-1 overflow-y-auto px-3 py-4 space-y-6">
+<!-- Channels Section -->
+<div>
+<div class="flex items-center justify-between px-3 mb-2">
+<span class="text-[11px] font-bold uppercase tracking-wider text-muted-plum">Channels</span>
+<button class="w-5 h-5 rounded-md hover:bg-white/10 flex items-center justify-center text-muted-plum hover:text-[#F5EAE6] transition-colors">
+<span class="material-symbols-outlined text-[15px]">add</span>
+</button>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sidebar-text/75 hover:bg-white/5 hover:text-white transition-all text-[14px] font-medium" href="#">
+<span class="text-[16px]">🌼</span>
+<span>general</span>
+</a>
+<!-- Active Channel: Rose Gold pill with dark plum text #2A1A16 -->
+<a class="flex items-center justify-between px-3 py-2 rounded-xl bg-rosegold-active text-[#2A1A16] shadow-[0_4px_16px_rgba(232,180,160,0.3)] text-[14px] font-bold transition-all" href="#">
+<div class="flex items-center gap-2.5">
+<span class="text-[16px]">🎨</span>
+<span>design</span>
+</div>
+<span class="w-2 h-2 rounded-full bg-[#2A1A16]"></span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sidebar-text/75 hover:bg-white/5 hover:text-white transition-all text-[14px] font-medium" href="#">
+<span class="text-[16px]">💻</span>
+<span>dev-team</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sidebar-text/75 hover:bg-white/5 hover:text-white transition-all text-[14px] font-medium" href="#">
+<span class="text-[16px]">📣</span>
+<span>announcements</span>
+</a>
+</nav>
+</div>
+<!-- Direct Messages Section -->
+<div>
+<div class="flex items-center justify-between px-3 mb-2">
+<span class="text-[11px] font-bold uppercase tracking-wider text-muted-plum">Direct Messages</span>
+<button class="w-5 h-5 rounded-md hover:bg-white/10 flex items-center justify-center text-muted-plum hover:text-[#F5EAE6] transition-colors">
+<span class="material-symbols-outlined text-[15px]">add</span>
+</button>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-sidebar-text/75 hover:bg-white/5 hover:text-white transition-all text-[13.5px]" href="#">
+<div class="relative w-6 h-6 rounded-full bg-rosegold-primary/30 text-rosegold-active flex items-center justify-center font-bold text-[10px]">
+                SJ
+                <span class="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-sidebar-bg"></span>
+</div>
+<span class="truncate">Sarah Jenkins</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-sidebar-text/75 hover:bg-white/5 hover:text-white transition-all text-[13.5px]" href="#">
+<div class="relative w-6 h-6 rounded-full bg-[#3B2A2A] text-rosegold-active flex items-center justify-center font-bold text-[10px]">
+                DK
+                <span class="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-sidebar-bg"></span>
+</div>
+<span class="truncate">David Kim</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-sidebar-text/75 hover:bg-white/5 hover:text-white transition-all text-[13.5px]" href="#">
+<div class="relative w-6 h-6 rounded-full bg-plum-deep/80 text-rosegold-active flex items-center justify-center font-bold text-[10px]">
+                ER
+                <span class="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-sidebar-bg"></span>
+</div>
+<span class="truncate">Elena Rostova</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-sidebar-text/75 hover:bg-white/5 hover:text-white transition-all text-[13.5px]" href="#">
+<div class="relative w-6 h-6 rounded-full bg-white/10 text-sidebar-text flex items-center justify-center font-bold text-[10px]">
+                AR
+                <span class="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-white/40 ring-2 ring-sidebar-bg"></span>
+</div>
+<span class="truncate">Alex Rivera</span>
+</a>
+</nav>
+</div>
+</div>
+<!-- Bottom User Pill Profile -->
+<div class="p-3 border-t border-border-plum bg-[#0A070A]">
+<div class="flex items-center justify-between p-2 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="relative w-8 h-8 rounded-full bg-gradient-to-tr from-plum-deep to-rosegold-primary text-white flex items-center justify-center font-bold text-[12px] flex-shrink-0">
+              SP
+              <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-sidebar-bg"></span>
+</div>
+<div class="min-w-0">
+<p class="text-[13px] font-semibold text-[#F5EAE6] truncate leading-tight">Sophia Patel</p>
+<p class="text-[11px] text-rosegold-active truncate">cozy &amp; online ✨</p>
+</div>
+</div>
+<button class="w-7 h-7 rounded-lg text-muted-plum hover:text-[#F5EAE6] flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- 2. CENTER CHAT AREA & TOP BAR: Dark Plum #221A20 -->
+<section class="flex-1 flex flex-col bg-chat-bg min-w-0 overflow-hidden relative">
+<!-- Top Bar -->
+<header class="h-16 px-6 border-b border-border-plum bg-[#1F171E] flex items-center justify-between flex-shrink-0 z-10">
+<div class="flex items-center gap-4 min-w-0">
+<div class="flex items-center gap-2 min-w-0">
+<span class="text-[20px]">🎨</span>
+<h1 class="text-[22px] font-bold text-[#F5EAE6] tracking-tight truncate">design</h1>
+<span class="hidden md:inline-flex items-center px-2.5 py-0.5 rounded-full bg-card-dark text-muted-plum text-[12px] font-medium ml-1 border border-border-plum-light/50">
+              Design Systems &amp; Clay Tokens
+            </span>
+</div>
+<!-- Stacked Member Avatars -->
+<div class="hidden lg:flex items-center pl-3 border-l border-border-plum">
+<div class="flex -space-x-2">
+<span class="w-7 h-7 rounded-full bg-rosegold-active text-[#2A1A16] flex items-center justify-center text-[11px] font-bold ring-2 ring-chat-bg">SJ</span>
+<span class="w-7 h-7 rounded-full bg-[#3B2A2A] text-rosegold-active flex items-center justify-center text-[11px] font-bold ring-2 ring-chat-bg border border-rosegold-primary/30">DK</span>
+<span class="w-7 h-7 rounded-full bg-plum-deep text-rosegold-active flex items-center justify-center text-[11px] font-bold ring-2 ring-chat-bg border border-rosegold-primary/30">ER</span>
+<span class="w-7 h-7 rounded-full bg-card-dark text-[#F5EAE6] flex items-center justify-center text-[10px] font-semibold ring-2 ring-chat-bg border border-border-plum-light"> +15</span>
+</div>
+</div>
+</div>
+<!-- Right actions: Huddle & Active Nesty AI Button -->
+<div class="flex items-center gap-2.5 flex-shrink-0">
+<!-- Start Huddle Pill -->
+<button class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-rosegold-primary hover:bg-rosegold-primary/90 text-white text-[13px] font-semibold transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[17px] text-white">headphones</span>
+<span>Start Huddle</span>
+</button>
+<!-- Active Nesty Indicator Button -->
+<button class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-plum-deep to-rosegold-primary text-white text-[13px] font-semibold shadow-md hover:brightness-110 transition-all border border-rosegold-primary/30">
+<span class="material-symbols-outlined text-[17px]">auto_awesome</span>
+<span>Nesty AI</span>
+<span class="w-2 h-2 rounded-full bg-rosegold-active animate-pulse"></span>
+</button>
+<div class="h-6 w-px bg-border-plum mx-1"></div>
+<button class="w-8 h-8 rounded-full hover:bg-white/5 text-muted-plum hover:text-[#F5EAE6] flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[19px]">search</span>
+</button>
+<button class="w-8 h-8 rounded-full hover:bg-white/5 text-muted-plum hover:text-[#F5EAE6] flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[19px]">push_pin</span>
+</button>
+</div>
+</header>
+<!-- Center Message Stream -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6 bg-chat-bg">
+<!-- Date Separator -->
+<div class="flex items-center justify-center">
+<span class="px-3.5 py-1 rounded-full bg-[#1F171E] border border-border-plum text-muted-plum text-[12px] font-semibold tracking-wide">
+            Today, October 24
+          </span>
+</div>
+<!-- Message 1: Sarah Jenkins - Dark Rose Plum Bubble #33242E -->
+<div class="flex items-start gap-3.5 max-w-2xl">
+<div class="relative flex-shrink-0">
+<div class="w-10 h-10 rounded-2xl bg-rosegold-primary/30 text-rosegold-active border border-rosegold-primary/40 flex items-center justify-center font-bold text-[14px] shadow-sm">
+              SJ
+            </div>
+<span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-chat-bg"></span>
+</div>
+<div class="space-y-1 min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="text-[14px] font-bold text-[#F5EAE6]">Sarah Jenkins</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-rosegold-primary/20 text-rosegold-active font-semibold">Lead Designer</span>
+<span class="text-[11px] text-muted-plum">10:14 AM</span>
+</div>
+<div class="p-4 rounded-24 rounded-tl-sm bg-bubble-plum-1 text-[#F5EAE6] border border-border-plum shadow-bubble space-y-2.5">
+<p class="text-[14.5px] leading-relaxed text-[#F5EAE6]">
+                Good morning team! ☀️ I just finalized the clay widget icons and our pastel illustration library for the Nest dashboard. Please take a look at the token naming so we can freeze v2 tokens for next sprint.
+              </p>
+<!-- Figma Attachment Card -->
+<div class="p-3 rounded-18 bg-[#2A1F26] border border-border-plum-light flex items-center justify-between gap-3 shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-9 h-9 rounded-xl bg-rosegold-primary/25 text-rosegold-active flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">palette</span>
+</div>
+<div class="min-w-0">
+<p class="text-[13px] font-bold text-[#F5EAE6] truncate">clay-illustration-system-v2.fig</p>
+<p class="text-[11px] text-muted-plum">Figma • 48 components • 14.2 MB</p>
+</div>
+</div>
+<button class="px-3 py-1 rounded-full bg-[#1F171E] hover:bg-rosegold-primary/20 text-rosegold-active border border-rosegold-primary/30 text-[12px] font-semibold shadow-xs transition-colors flex items-center gap-1 flex-shrink-0">
+<span class="material-symbols-outlined text-[15px]">visibility</span>
+<span>Inspect</span>
+</button>
+</div>
+<div class="flex items-center gap-1.5 pt-1">
+<button class="px-2.5 py-0.5 rounded-full bg-white/5 hover:bg-white/10 text-[12px] text-muted-plum hover:text-[#F5EAE6] border border-border-plum font-medium flex items-center gap-1">
+<span>🌸</span> <span>6</span>
+</button>
+<button class="px-2.5 py-0.5 rounded-full bg-white/5 hover:bg-white/10 text-[12px] text-muted-plum hover:text-[#F5EAE6] border border-border-plum font-medium flex items-center gap-1">
+<span>✨</span> <span>4</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Message 2: David Kim - Warm Deep Plum #3B2A2A -->
+<div class="flex items-start gap-3.5 max-w-2xl">
+<div class="relative flex-shrink-0">
+<div class="w-10 h-10 rounded-2xl bg-[#3B2A2A] text-rosegold-active border border-rosegold-primary/30 flex items-center justify-center font-bold text-[14px] shadow-sm">
+              DK
+            </div>
+<span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-chat-bg"></span>
+</div>
+<div class="space-y-1 min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="text-[14px] font-bold text-[#F5EAE6]">David Kim</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white/10 text-rosegold-active font-semibold">Frontend Architect</span>
+<span class="text-[11px] text-muted-plum">10:28 AM</span>
+</div>
+<div class="p-4 rounded-24 rounded-tl-sm bg-bubble-plum-2 text-[#F5EAE6] border border-border-plum shadow-bubble space-y-2.5">
+<p class="text-[14.5px] leading-relaxed">
+                Love the tactility on these icons, Sarah! I am wiring up the telemetry charts now. We need to implement bouncy token transitions for telemetry charts so the data rings feel pillowy when stats refresh.
+              </p>
+<!-- Code Snippet -->
+<div class="p-3 rounded-18 bg-[#20151C] text-[12px] font-mono border border-border-plum-light shadow-sm">
+<div class="flex items-center justify-between pb-1.5 mb-1.5 border-b border-border-plum text-[11px] text-rosegold-active font-bold">
+<span>theme-clay-spring.ts</span>
+<span class="font-normal text-muted-plum font-sans text-[10px]">cubic-bezier</span>
+</div>
+<pre class="leading-relaxed text-[#F2E4DE]"><code><span class="text-rosegold-primary font-bold">export const</span> clayBounce = {
+  tension: <span class="text-rosegold-active font-bold">170</span>, friction: <span class="text-rosegold-active font-bold">12</span>,
+  clayDepth: <span class="text-muted-plum">'0 12px 28px -4px rgba(183, 110, 121, 0.25)'</span>
+};</code></pre>
+</div>
+<div class="flex items-center gap-1.5 pt-1">
+<button class="px-2.5 py-0.5 rounded-full bg-white/5 hover:bg-white/10 text-[12px] text-muted-plum hover:text-[#F5EAE6] border border-border-plum font-medium flex items-center gap-1">
+<span>🚀</span> <span>5</span>
+</button>
+<button class="px-2.5 py-0.5 rounded-full bg-white/5 hover:bg-white/10 text-[12px] text-muted-plum hover:text-[#F5EAE6] border border-border-plum font-medium flex items-center gap-1">
+<span>🥑</span> <span>2</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Message 3: Elena Rostova - Alternating Deep Plum #33242E -->
+<div class="flex items-start gap-3.5 max-w-2xl">
+<div class="relative flex-shrink-0">
+<div class="w-10 h-10 rounded-2xl bg-plum-deep/80 text-rosegold-active border border-rosegold-primary/30 flex items-center justify-center font-bold text-[14px] shadow-sm">
+              ER
+            </div>
+<span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-chat-bg"></span>
+</div>
+<div class="space-y-1 min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="text-[14px] font-bold text-[#F5EAE6]">Elena Rostova</span>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-rosegold-primary/20 text-rosegold-active font-semibold">Staff QA</span>
+<span class="text-[11px] text-muted-plum">10:35 AM</span>
+</div>
+<div class="p-4 rounded-24 rounded-tl-sm bg-bubble-plum-1 text-[#F5EAE6] border border-border-plum shadow-bubble space-y-2.5">
+<p class="text-[14.5px] leading-relaxed">
+                Ran the automated visual regression tests on the new badge components. One note: we must audit secondary badge contrast against WCAG AA before merging tomorrow. The peach container on white background needs a tiny bump in label opacity!
+              </p>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#20151C] text-rosegold-active font-semibold text-[11.5px] border border-rosegold-primary/20">
+<span class="material-symbols-outlined text-[15px]">verified_user</span>
+<span>Automated Report: 94/96 contrast pairs passed AA standard</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Channel Chat Input Bar: #2A2028 with border #3A2D36 -->
+<footer class="p-4 bg-chat-bg border-t border-border-plum">
+<div class="flex items-center gap-2 p-1.5 pl-4 rounded-full bg-[#2A2028] border border-[#3A2D36] shadow-inner">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-muted-plum hover:text-[#F5EAE6] transition-colors">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+</button>
+<input class="flex-1 bg-transparent border-0 focus:ring-0 text-[14px] text-[#F5EAE6] placeholder:text-muted-plum/70 outline-none" placeholder="Message #design or type /nesty to ask mascot..." type="text"/>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-muted-plum hover:text-[#F5EAE6] transition-colors">
+<span class="material-symbols-outlined text-[20px]">sentiment_satisfied</span>
+</button>
+<button class="w-9 h-9 rounded-full bg-gradient-to-r from-[#3D1E3A] to-[#B76E79] text-white flex items-center justify-center shadow-md hover:brightness-110 transition-all">
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+</footer>
+</section>
+<!-- 3. RIGHT SIDE PANEL: NESTY AI ASSISTANT (Black Plum #1B1319, border-l #2E222B) -->
+<aside class="w-[390px] xl:w-[410px] bg-panel-drawer border-l border-border-plum flex flex-col flex-shrink-0 shadow-nesty-panel z-30 relative">
+<!-- Mascot Drawer Header -->
+<header class="p-4 pb-3.5 border-b border-border-plum bg-panel-drawer flex items-center justify-between flex-shrink-0">
+<div class="flex items-center gap-3 min-w-0">
+<!-- Mascot Avatar 3D Nesty Bird -->
+<div class="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-plum-deep to-rosegold-primary p-0.5 shadow-md flex-shrink-0">
+<img alt="Nesty Mascot 3D AI Assistant" class="w-full h-full object-cover rounded-[14px]" src="https://lh3.googleusercontent.com/aida/ALJJyrDdl9Iebry18CxjS0qwXefLHyUuYdGn5Wa6UQPzN_R54YFxDCBGLbokJEc-LwIOKEdnetkRRZ18o_4oaPpr7GY1qLKsHvFtGbhRNHwJlPlyWlawlgMXVx0Xcixr-V-jIbgXj4-sfzfPfVlDHn3jTY2S9_dX5_7qEevMFiGYBLZa2cT3SeBBSdmiXOFZ_EoJiFtcfOlK2v-wLGar9we7kSa7ss-XZ2QIOcP8QTMQvqo"/>
+<span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-2 ring-panel-drawer"></span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<h2 class="text-[17px] font-bold text-[#F5EAE6] truncate leading-tight">Nesty AI</h2>
+<span class="px-2 py-0.5 rounded-full bg-rosegold-active/20 text-rosegold-active font-bold text-[10px] tracking-wide border border-rosegold-active/30">
+                ASSISTANT
+              </span>
+</div>
+<p class="text-[12px] text-muted-plum flex items-center gap-1 mt-0.5">
+<span>Your cosy nest assistant</span>
+<span>•</span>
+<span class="text-emerald-400 font-semibold">Online</span>
+</p>
+</div>
+</div>
+<!-- Controls: Dock / Close -->
+<div class="flex items-center gap-1">
+<button class="w-7 h-7 rounded-lg hover:bg-white/5 text-muted-plum hover:text-[#F5EAE6] flex items-center justify-center transition-colors" title="Dock view">
+<span class="material-symbols-outlined text-[18px]">dock_to_right</span>
+</button>
+<button class="w-7 h-7 rounded-lg hover:bg-white/5 text-muted-plum hover:text-[#F5EAE6] flex items-center justify-center transition-colors" title="More options">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<button class="w-7 h-7 rounded-lg hover:bg-rose-950/60 text-muted-plum hover:text-rose-300 flex items-center justify-center transition-colors ml-0.5" title="Close Nesty panel">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Nesty Content Area -->
+<div class="flex-1 overflow-y-auto p-4 space-y-4">
+<!-- Quick Action Cards Grid (4 clickable cards): bg #2A1F26 border #3A2C35 -->
+<div>
+<p class="text-[11px] font-bold uppercase tracking-wider text-muted-plum mb-2 px-1">Quick Actions</p>
+<div class="grid grid-cols-2 gap-2">
+<!-- 1. Summarise channel -->
+<button class="p-2.5 rounded-18 bg-[#2A1F26] border border-[#3A2C35] hover:border-rosegold-primary hover:shadow-card-warm text-left transition-all group flex items-start gap-2">
+<div class="w-7 h-7 rounded-xl bg-rosegold-primary/20 text-rosegold-active flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[16px]">summarize</span>
+</div>
+<div class="min-w-0">
+<p class="text-[12px] font-bold text-[#F5EAE6] leading-tight group-hover:text-rosegold-active">Summarise channel</p>
+<p class="text-[10px] text-muted-plum truncate">Catch up fast</p>
+</div>
+</button>
+<!-- 2. Draft a reply -->
+<button class="p-2.5 rounded-18 bg-[#2A1F26] border border-[#3A2C35] hover:border-rosegold-primary hover:shadow-card-warm text-left transition-all group flex items-start gap-2">
+<div class="w-7 h-7 rounded-xl bg-plum-deep text-rosegold-active flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[16px]">edit_note</span>
+</div>
+<div class="min-w-0">
+<p class="text-[12px] font-bold text-[#F5EAE6] leading-tight group-hover:text-rosegold-active">Draft a reply</p>
+<p class="text-[10px] text-muted-plum truncate">Polite &amp; clear</p>
+</div>
+</button>
+<!-- 3. Find files -->
+<button class="p-2.5 rounded-18 bg-[#2A1F26] border border-[#3A2C35] hover:border-rosegold-primary hover:shadow-card-warm text-left transition-all group flex items-start gap-2">
+<div class="w-7 h-7 rounded-xl bg-[#33242E] text-rosegold-active flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[16px]">folder_open</span>
+</div>
+<div class="min-w-0">
+<p class="text-[12px] font-bold text-[#F5EAE6] leading-tight group-hover:text-rosegold-active">Find files</p>
+<p class="text-[10px] text-muted-plum truncate">Figma, tokens, PRs</p>
+</div>
+</button>
+<!-- 4. Meeting notes -->
+<button class="p-2.5 rounded-18 bg-[#2A1F26] border border-[#3A2C35] hover:border-rosegold-primary hover:shadow-card-warm text-left transition-all group flex items-start gap-2">
+<div class="w-7 h-7 rounded-xl bg-sidebar-bg text-rosegold-primary flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[16px]">event_note</span>
+</div>
+<div class="min-w-0">
+<p class="text-[12px] font-bold text-[#F5EAE6] leading-tight group-hover:text-rosegold-active">Meeting notes</p>
+<p class="text-[10px] text-muted-plum truncate">Key takeaways</p>
+</div>
+</button>
+</div>
+</div>
+<!-- Sample AI Conversation -->
+<div class="space-y-3 pt-1">
+<!-- User Prompt Bubble (Sophia Patel): Gradient #3D1E3A to #B76E79 with text #F5EAE6 -->
+<div class="flex flex-col items-end space-y-1">
+<div class="flex items-center gap-1.5 px-1 text-[11px] text-muted-plum font-medium">
+<span>Sophia Patel</span>
+<span>•</span>
+<span>10:52 AM</span>
+</div>
+<div class="max-w-[88%] p-3 rounded-20 rounded-tr-sm bg-gradient-to-r from-[#3D1E3A] to-[#B76E79] text-[#F5EAE6] shadow-sm border border-rosegold-primary/30">
+<p class="text-[13.5px] font-semibold leading-snug">
+                What are my tasks from #design this week?
+              </p>
+</div>
+</div>
+<!-- Nesty Response Card -->
+<div class="flex items-start gap-2.5 pt-1">
+<div class="w-7 h-7 rounded-xl overflow-hidden shadow-xs flex-shrink-0 mt-0.5 ring-1 ring-border-plum-light">
+<img alt="Nesty" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ALJJyrDdl9Iebry18CxjS0qwXefLHyUuYdGn5Wa6UQPzN_R54YFxDCBGLbokJEc-LwIOKEdnetkRRZ18o_4oaPpr7GY1qLKsHvFtGbhRNHwJlPlyWlawlgMXVx0Xcixr-V-jIbgXj4-sfzfPfVlDHn3jTY2S9_dX5_7qEevMFiGYBLZa2cT3SeBBSdmiXOFZ_EoJiFtcfOlK2v-wLGar9we7kSa7ss-XZ2QIOcP8QTMQvqo"/>
+</div>
+<div class="flex-1 min-w-0 space-y-2.5">
+<!-- Nesty Speech Intro Bubble -->
+<div class="p-3 rounded-20 rounded-tl-sm bg-[#261B23] border border-[#3B2A35] shadow-bubble text-[#F5EAE6]">
+<p class="text-[13px] leading-relaxed">
+                  Here are your <span class="font-bold text-rosegold-active">3 priority action items</span> synthesized from discussions in <span class="font-bold text-rosegold-primary">#design</span> this week:
+                </p>
+</div>
+<!-- Structured Task Items Card: bg #261B23 border #3B2A35 -->
+<div class="p-3.5 rounded-20 bg-[#261B23] border border-[#3B2A35] shadow-card-warm space-y-3">
+<div class="flex items-center justify-between pb-1 border-b border-border-plum">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[17px] text-rosegold-primary">task_alt</span>
+<span class="text-[12.5px] font-bold text-[#F5EAE6]">Action Items</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-rosegold-active text-[#2A1A16] font-bold text-[10.5px]">
+                    1/3 Done
+                  </span>
+</div>
+<!-- 3 Action Items -->
+<div class="space-y-2.5">
+<!-- Task 1 (Checked) -->
+<div class="p-2.5 rounded-18 bg-[#1D141B] border border-border-plum flex items-start gap-2.5 group">
+<button class="mt-0.5 w-4 h-4 rounded bg-rosegold-primary text-white flex items-center justify-center flex-shrink-0 shadow-2xs">
+<span class="material-symbols-outlined text-[13px] font-bold">check</span>
+</button>
+<div class="flex-1 min-w-0">
+<p class="text-[12.5px] font-bold text-[#F5EAE6]/50 line-through leading-snug">
+                        Audit secondary badge contrast against WCAG AA
+                      </p>
+<div class="text-[11px] text-muted-plum mt-0.5">
+<span>Elena Rostova</span> • <span class="text-rose-400 font-semibold">Due Tomorrow, Oct 25</span>
+</div>
+<a class="inline-flex items-center gap-1 mt-1 text-[10.5px] text-rosegold-active font-semibold hover:underline" href="#">
+<span>↗ View in #design at 10:35 AM</span>
+</a>
+</div>
+</div>
+<!-- Task 2 (Pending) -->
+<div class="p-2.5 rounded-18 bg-[#2A1F26] border border-[#3A2C35] hover:border-rosegold-primary/50 flex items-start gap-2.5 transition-colors group">
+<button class="mt-0.5 w-4 h-4 rounded border-2 border-rosegold-primary/40 hover:border-rosegold-active flex items-center justify-center flex-shrink-0 transition-colors">
+</button>
+<div class="flex-1 min-w-0">
+<p class="text-[12.5px] font-bold text-[#F5EAE6] leading-snug">
+                        Implement bouncy token transitions for telemetry charts
+                      </p>
+<div class="text-[11px] text-muted-plum mt-0.5">
+<span>David Kim</span> • <span class="text-emerald-400 font-semibold">Due Friday, Oct 27</span>
+</div>
+<a class="inline-flex items-center gap-1 mt-1 text-[10.5px] text-rosegold-active font-semibold hover:underline" href="#">
+<span>↗ View in #design at 10:28 AM</span>
+</a>
+</div>
+</div>
+<!-- Task 3 (Pending) -->
+<div class="p-2.5 rounded-18 bg-[#2A1F26] border border-[#3A2C35] hover:border-rosegold-primary/50 flex items-start gap-2.5 transition-colors group">
+<button class="mt-0.5 w-4 h-4 rounded border-2 border-rosegold-primary/40 hover:border-rosegold-active flex items-center justify-center flex-shrink-0 transition-colors">
+</button>
+<div class="flex-1 min-w-0">
+<p class="text-[12.5px] font-bold text-[#F5EAE6] leading-snug">
+                        Finalize clay widget icons &amp; pastel illustration library
+                      </p>
+<div class="text-[11px] text-muted-plum mt-0.5">
+<span>Sarah Jenkins</span> • <span class="text-rosegold-active font-semibold">Due Monday, Oct 30</span>
+</div>
+<a class="inline-flex items-center gap-1 mt-1 text-[10.5px] text-rosegold-active font-semibold hover:underline" href="#">
+<span>↗ View in #design at 10:14 AM</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Sources Metadata Box -->
+<div class="p-2 rounded-14 bg-[#1E161D] text-[11px] text-muted-plum flex items-center justify-between border border-border-plum">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-rosegold-primary">link</span>
+<span>Sources: 3 messages in <strong class="text-[#F5EAE6] font-bold">#design</strong></span>
+</div>
+<span class="text-[10px] text-muted-plum">Synced 10:52 AM</span>
+</div>
+<!-- Interactive CTA Buttons -->
+<div class="flex items-center gap-2 pt-1">
+<!-- Primary Rose Gold Button -->
+<button class="flex-1 py-2 px-3.5 rounded-full bg-rosegold-primary hover:bg-rosegold-primary/90 active:scale-[0.98] text-white text-[12.5px] font-bold shadow-md transition-all flex items-center justify-center gap-1.5 border border-rosegold-primary/30">
+<span class="material-symbols-outlined text-[15px]">bookmark_add</span>
+<span>Add to my tasks ✨</span>
+</button>
+<!-- Secondary Plum Button -->
+<button class="py-2 px-3 rounded-full bg-[#2A1F26] hover:bg-[#33242E] text-[#F5EAE6] border border-[#3A2C35] text-[12px] font-semibold transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-muted-plum">share</span>
+<span>Share summary</span>
+</button>
+</div>
+</div>
+<!-- Footnote -->
+<p class="text-[10.5px] text-muted-plum/70 text-center px-2">
+                Nesty can make mistakes - double-check important info
+              </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Dedicated Bottom "Ask Nesty anything" Input Bar: bg #2A2028 border #3A2D36 -->
+<footer class="p-3.5 bg-panel-drawer border-t border-border-plum flex-shrink-0">
+<form class="relative flex items-center gap-2 bg-[#2A2028] rounded-full p-1 pl-3.5 border border-[#3A2D36] shadow-sm focus-within:border-rosegold-primary focus-within:ring-2 focus-within:ring-rosegold-primary/20 transition-all">
+<span class="material-symbols-outlined text-[18px] text-rosegold-primary">auto_awesome</span>
+<input class="flex-1 bg-transparent border-0 focus:ring-0 text-[13px] text-[#F5EAE6] placeholder:text-muted-plum outline-none" placeholder="Ask Nesty anything about #design..." type="text"/>
+<!-- Send button: gradient #3D1E3A to #B76E79 -->
+<button class="w-8 h-8 rounded-full bg-gradient-to-r from-[#3D1E3A] to-[#B76E79] text-white flex items-center justify-center shadow-sm hover:brightness-110 active:scale-95 transition-all" type="submit">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+</button>
+</form>
+</footer>
+</aside>
+</div>
+</body></html>
